@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoonX Grocery Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #hero img {
+            height: auto;
+            max-height: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-green-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">AapkiDukaan</h1>
+            <div class="flex items-center space-x-4">
+                <a href="#home" class="hover:text-gray-200">Home</a>
+                <a href="#products" class="hover:text-gray-200">Products</a>
+                <button id="loginBtn" class="bg-white text-green-600 px-4 py-2 rounded hover:bg-gray-200">Login</button>
+                <button id="addProductBtn" class="bg-white text-green-600 px-4 py-2 rounded hover:bg-gray-200">Add Product</button>
+            </div>
+        </div>
+    </nav>
+    <section id="hero" class="relative">
+        <img src="https://sdmntprcentralus.oaiusercontent.com/files/00000000-9ab4-61f5-bf3b-82aa7dd10347/raw?se=2025-05-09T13%3A18%3A56Z&sp=r&sv=2024-08-04&sr=b&scid=00000000-0000-0000-0000-000000000000&skoid=9ccea605-1409-4478-82eb-9c83b25dc1b0&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-09T10%3A52%3A22Z&ske=2025-05-10T10%3A52%3A22Z&sks=b&skv=2024-08-04&sig=cMOd3unXgrI8z83xMcjY9nBX5cNrcPYXBtLqWa2UDgo%3D" alt="Hero Image" class="w-full h-96 object-cover">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="text-center text-white">
+                <h2 class="text-4xl font-bold mb-4">Fresh Groceries Delivered to Your Door</h2>
+                <p class="text-lg mb-6">Experience the best in organic and locally sourced products.</p>
+                <a href="#products" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700">Shop Now</a>
+            </div>
+        </div>
+    </section></section>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-green-100 py-20">
+        <div class="container mx-auto text-center">
+            <h2 class="text-5xl font-bold text-green-800 mb-4">Welcome to 'Aapki Dukaan'</h2>
+            <p class="text-xl text-gray-600 mb-8">Fresh, Organic, and Locally Sourced Products Delivered to Your Door</p>
+            <a href="#products" class="bg-green-600 text-white px-6 py-3 rounded-full hover:bg-green-700">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-6 rounded-lg w-96">
+            <h3 class="text-2xl font-bold mb-4">Login</h3>
+            <form id="loginForm">
+                <input type="email" placeholder="Email" class="w-full p-2 mb-4 border rounded" required>
+                <input type="password" placeholder="Password" class="w-full p-2 mb-4 border rounded" required>
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded w-full hover:bg-green-700">Login</button>
+            </form>
+            <button id="closeLoginModal" class="mt-4 text-gray-600 hover:text-gray-800">Close</button>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white p-8 rounded-lg w-full max-w-md">
+            <h3 class="text-2xl font-bold text-green-800 mb-6">Add New Product</h3>
+            <form id="productForm">
+                <div class="mb-4">
+                    <label for="productName" class="block text-gray-700 mb-2">Product Name</label>
+                    <input type="text" id="productName" placeholder="Enter product name" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="productCategory" class="block text-gray-700 mb-2">Category</label>
+                    <select id="productCategory" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" required>
+                        <option value="">Select Category</option>
+                        <option value="Fresh Produce">Fresh Produce</option>
+                        <option value="Meat & Seafood">Meat & Seafood</option>
+                        <option value="Dairy & Eggs">Dairy & Eggs</option>
+                        <option value="Bakery">Bakery</option>
+                        <option value="Frozen Foods">Frozen Foods</option>
+                        <option value="Pantry Staples">Pantry Staples</option>
+                        <option value="Snacks & Sweets">Snacks & Sweets</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Health & Beauty">Health & Beauty</option>
+                        <option value="Household Goods">Household Goods</option>
+                        <option value="Wine & Beer">Wine & Beer</option>
+                        <option value="Natural & Organic">Natural & Organic</option>
+                        <option value="MoonX">MoonX</option>
+                        <option value="Vin Vault">Vin Vault</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="productPrice" class="block text-gray-700 mb-2">Price ($)</label>
+                    <input type="number" id="productPrice" placeholder="Enter price" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600" step="0.01" required>
+                </div>
+                <div class="mb-6">
+                    <label for="productImage" class="block text-gray-700 mb-2">Product Image</label>
+                    <input type="file" id="productImage" accept="image/*" class="w-full p-3 border rounded">
+                </div>
+                <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded w-full hover:bg-green-700 transition">Add Product</button>
+            </form>
+            <button id="closeProductModal" class="mt-4 text-gray-600 hover:text-gray-800 w-full text-center">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <section id="products" class="py-12 bg-white">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-8">Our Products</h3>
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-800 text-white py-12">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-xl font-bold mb-4">About MoonX Grocery</h4>
+                <p>MoonX Grocery is your one-stop shop for fresh, organic, and locally sourced products. We are committed to quality, sustainability, and customer satisfaction. Shop with us for the best grocery experience!</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Contact Us</h4>
+                <p>Email: support@moonxgrocery.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Fresh Lane, Green City, GC 12345</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                <ul>
+                    <li><a href="#home" class="hover:text-gray-200">Home</a></li>
+                    <li><a href="#products" class="hover:text-gray-200">Products</a></li>
+                    <li><a href="#add-product" class="hover:text-gray-200">Add Product</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <p>© 2025 MoonX Grocery. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Login Modal
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeLoginModal = document.getElementById('closeLoginModal');
+        const loginForm = document.getElementById('loginForm');
+
+        loginBtn.addEventListener('click', () => {
+            loginModal.classList.remove('hidden');
+        });
+
+        closeLoginModal.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+        });
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login successful!');
+            loginModal.classList.add('hidden');
+        });
+
+        // Add Product Modal
+        const addProductBtn = document.getElementById('addProductBtn');
+        const addProductModal = document.getElementById('addProductModal');
+        const closeProductModal = document.getElementById('closeProductModal');
+        const productForm = document.getElementById('productForm');
+
+        addProductBtn.addEventListener('click', () => {
+            addProductModal.classList.remove('hidden');
+        });
+
+        closeProductModal.addEventListener('click', () => {
+            addProductModal.classList.add('hidden');
+            productForm.reset();
+        });
+
+        // Product Management
+        const productGrid = document.getElementById('productGrid');
+        let products = [
+            {
+                name: 'Organic Apples',
+                category: 'Fresh Produce',
+                price: 4.99,
+                image: 'https://www.orgpick.com/cdn/shop/articles/Apple_1024x1024.jpg?v=1547124407'
+            },
+            {
+                name: 'Grass-Fed Beef',
+                category: 'Meat & Seafood',
+                price: 12.99,
+                image: 'https://i.etsystatic.com/46493019/r/il/f21933/5470522642/il_fullxfull.5470522642_53w1.jpg'
+            },
+            {
+                name: 'Amul Milk',
+                category: 'Dairy & Eggs',
+                price: 3.99,
+                image: 'https://www.bbassets.com/media/uploads/p/l/40090893_7-amul-amul-gold.jpg'
+            }
+        ];
+
+        function displayProducts() {
+            productGrid.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-gray-100 rounded-lg shadow p-4';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover rounded mb-4">
+                    <h4 class="text-xl font-bold">${product.name}</h4>
+                    <p class="text-gray-600">${product.category}</p>
+                    <p class="text-green-600 font-bold">$${product.price.toFixed(2)}</p>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded mt-2 hover:bg-green-700">Add to Cart</button>
+                `;
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        productForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('productName').value.trim();
+            const category = document.getElementById('productCategory').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const imageInput = document.getElementById('productImage');
+            const image = imageInput.files[0] ? URL.createObjectURL(imageInput.files[0]) : 'https://via.placeholder.com/300';
+
+            if (name && category && !isNaN(price)) {
+                products.push({ name, category, price, image });
+                displayProducts();
+                productForm.reset();
+                addProductModal.classList.add('hidden');
+                alert('Product added successfully!');
+            }
+
+            // Add hover animation to product cards
+            const productCards = document.querySelectorAll('#productGrid > div');
+            productCards.forEach(card => {
+                card.classList.add('transition', 'transform', 'hover:scale-105', 'hover:shadow-lg', 'duration-300', 'ease-in-out');
+            });
+        });
+        // Close the modal when clicking outside of it
+        document.addEventListener('click', (e) => {
+            if (e.target === loginModal || e.target === addProductModal) {
+            loginModal.classList.add('hidden');
+            addProductModal.classList.add('hidden');
+            productForm.reset();
+            }
+        });
+
+        // Add animation to product section
+        const productSection = document.getElementById('products');
+        productSection.classList.add('transition', 'transform', 'duration-500', 'ease-in-out', 'opacity-0');
+
+        window.addEventListener('scroll', () => {
+            const sectionTop = productSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            if (sectionTop < windowHeight - 100) {
+            productSection.classList.remove('opacity-0');
+            productSection.classList.add('opacity-100', 'translate-y-0');
+            }
+        });
+
+        productSection.classList.add('translate-y-10');
+        // Add more products to the initial list
+        products.push(
+            {
+            name: 'Bananas',
+            category: 'Fresh Produce',
+            price: 1.29,
+            image: 'https://www.nipponexpress.com/press/report/img/06-Nov-20-1.jpeg'
+            },
+            {
+            name: 'Salmon Fillet',
+            category: 'Meat & Seafood',
+            price: 15.99,
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE2kXgxEL9TDN1euYjxi4IKnG5djSvHPGy3A&s'
+            },
+            {
+            name: 'Cheddar Cheese',
+            category: 'Dairy & Eggs',
+            price: 5.49,
+            image: 'https://www.foodsmith.in/cdn/shop/collections/Cheddar_1024x1024.jpg?v=1619874294'
+            },
+            {
+            name: 'Whole Wheat Bread',
+            category: 'Bakery',
+            price: 2.99,
+            image: 'https://www.veganricha.com/wp-content/uploads/2015/07/100-whole-wheat-bread-9272.jpg'
+            },
+            {
+            name: 'Strawberries',
+            category: 'Fresh Produce',
+            price: 3.99,
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAm5cXmmHcKfjP_P4L3zsl5kiG3ujMqQHrPg&s'
+            },
+            {
+            name: 'Greek Yogurt',
+            category: 'Dairy & Eggs',
+            price: 2.99,
+            image: 'https://m.media-amazon.com/images/I/51gc4bxCBuL.jpg'
+            },
+            {
+            name: 'Granola Bars',
+            category: 'Snacks & Sweets',
+            price: 5.49,
+            image: 'https://5.imimg.com/data5/SELLER/Default/2023/5/309234046/MA/VL/CE/97405345/nature-valley-granola-bar-honey-oats.jpg'
+            },
+            {name: 'Frozen Peas',
+            category: 'Frozen Foods',
+            price: 1.99,
+            image: 'https://www.smc-madhusudan.co.in/cdn/shop/files/FrozenPea1KGPOLLYPACK.jpg?v=1714552252'
+            },
+            {
+            name: 'Almond Butter',
+            category: 'Pantry Staples',
+            price: 8.99,
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN4bsGBYV-804oVk1hZGJCn_h5KGnTQUNg-w&s'
+            },
+            {
+            name: 'Dark Chocolate',
+            category: 'Snacks & Sweets',
+            price: 3.49,
+            image: 'https://m.media-amazon.com/images/I/81EAqP0D0+L.jpg'
+            },
+            {
+            name: 'Orange Juice',
+            category: 'Beverages',
+            price: 4.99,
+            image: 'https://images-prod.healthline.com/hlcmsresource/images/AN_images/orange-juice-1296x728-feature.jpg'
+            },
+            {
+            name: 'Shampoo',
+            category: 'Health & Beauty',
+            price: 6.99,
+            image: 'https://olamor.in/cdn/shop/files/GlistenKeratinShampoo1L.jpg?v=1700474623&width=1500'
+            },
+            {
+            name: 'Dish Soap',
+            category: 'Household Goods',
+            price: 2.49,
+            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq2v1g3xXk4j5l6m7G8J6Z5c1z4n7Y2a3b8A&s'
+            },
+            {
+            name: 'Shampoo',
+            category: 'Health & Beauty',
+            price: 6.99,
+            image: 'https://olamor.in/cdn/shop/files/GlistenKeratinShampoo1L.jpg?v=1700474623&width=1500'
+            },
+            {
+            name: 'Dish Soap',
+            category: 'Household Goods',
+            price: 2.49,
+            image: '₹https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq2v1g3xXk4j5l6m7G8J6Z5c1z4n7Y2a3b8A&s'
+            },
+            {
+            }
+        );
+
+        // Initial product display
+        displayProducts();
+
+        // Initial product display
+        displayProducts();
+    </script>
+</body>
+</html>
